@@ -22,12 +22,13 @@
 
 <div>
 	<!-- @GetMapping("parameterTest")이 가지고 있는게 action에 들어가야함 -->
-	<form action="parameterTest" method="post">
+	<form action="reqParamTest" method="post">
 		<input type="text" name="employeeId">
-		<input type="text" name="lastName">
+		<!-- <input type="text" name="lastName"> -->
 		<input type="text" name="jobId">
 		<button type="submit">post 전송</button>
 	</form>
 </div>
+
 </body>
 </html>
