@@ -28,7 +28,7 @@ public class empMapperClient {
 		assertFalse(list.isEmpty());
 	}
 	
-	//@Test
+	@Test
 	public void getEmpInfo() {
 		EmpVO empVO = new EmpVO();
 		empVO.setEmployeeId(100);
@@ -70,7 +70,7 @@ public class empMapperClient {
 		assertEquals(result, 1);
 	}
 	
-	@Test
+	//@Test
 	public void deleteEmpInfo() {
 		EmpVO empVO = new EmpVO();
 		empVO.setEmployeeId(207);
