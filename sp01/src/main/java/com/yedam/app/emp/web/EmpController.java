@@ -82,7 +82,7 @@ public class EmpController {
 	
 	// 삭제
 	@GetMapping("empDelete")
-	public String empDeleteProcess(@RequestParam Integer employeeId,
+	public String empDeleteProcess(@RequestParam Integer employeeId,	// 하나의 값만 받을 수 있도록, 만약 employeeId말고 name을 보내면 안 읽어드림
 								   RedirectAttributes ratt) {
 		boolean result = empService.deleteEmpInfo(employeeId);
 		

@@ -59,6 +59,18 @@
 		</tbody>
 	</table>
 	<script type="text/javascript">
+		//let temp = ${result }
+		
+		if(`${result }` != ""){	
+			alert(`${result }`);	
+		}
+		
+		// JSP가 가지고 있는 컴파일 순서
+		// JSP -> servlet -> java -> 클라이언트(html -> css -> js) 순으로 컴파일 일어남
+		// 이 순으로 진행되므로 이엘태그 html, css, js에서 사용할 수 있다.
+		// js사용하려면 ``빽팁을 써야한다. 또 빈 이엘태그 사용하면 안 된다.(이 부분은 jsp라서 먼저 읽기 때문에 주석처리가 안 된다.)
+	</script>
+	<script type="text/javascript">
 		console.log(document.querySelector("#sts").innerText);
 	</script>
 </body>
