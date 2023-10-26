@@ -77,6 +77,7 @@ public class EmpController {
 	@PostMapping("empUpdateAjax")
 	@ResponseBody
 	public Map<String, Object> empUpdateAjaxProcess(@RequestBody EmpVO empVO) { // 받는거는 매게변수 넣는곳에
+		//System.out.println(empService.updateEmpInfo(empVO));
 		return empService.updateEmpInfo(empVO);
 	}
 	
