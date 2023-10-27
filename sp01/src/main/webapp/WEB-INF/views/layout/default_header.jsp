@@ -36,7 +36,7 @@
           <li><a class="nav-link px-2 link-body-emphasis" href="${pageContext.request.contextPath }/">Home</a></li>
           <li><a href="${pageContext.request.contextPath }/empList" class="nav-link px-2 link-body-emphasis">Employee</a></li>
           <li><a href="${pageContext.request.contextPath }/empInsert" class="nav-link px-2 link-body-emphasis">Insert</a></li>
-          <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+          <li><a href="${pageContext.request.contextPath }/boardList" class="nav-link px-2 link-body-emphasis">Board</a></li>
         </ul>
 
 <!--         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">

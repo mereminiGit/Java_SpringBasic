@@ -27,8 +27,9 @@ public class BoardController {
 	@GetMapping("boardList")
 	public String getBoardList(Model model) {
 		List<BoardVO> list = boardService.getBoardList();
-		model.addAttribute("boardList", list);
-		return "board/boardList";	//jsp
+		//model.addAttribute("boardList", boardService.getBoardList());
+		model.addAttribute("boardList", list);	// -> list를 쓴다면 jsp에 무조건 c태그
+		return "board/boardList";	//jsp, tiles에 넘겨주기 위해서
 	}
 	
 	// 단건조회		: URI - boardInfo / PARAMETER - BoardVO / RETURN - board/boardInfo
@@ -48,13 +49,15 @@ public class BoardController {
 	// 등록 - 처리		: URI - boardInsert / PARAMETER - BoardVO / RETURN - board/boardList
 	@PostMapping("boardInsert")
 	public String insertBoardInfoProcess(BoardVO boardVO) {
-		int bno = boardService.insertBoard(boardVO);
+		//int bno = boardService.insertBoard(boardVO);
+		boardService.insertBoard(boardVO);
+		return "redirect:boardList";
+//		redirect: 후 컨트롤러를 호출하면 됨
 		
-		if (bno > 999) {
-			return "redirect:boardInfo?bno=" + bno;
-		} else {
-			return "redirect:boardList";
-		}
+		/*
+		 * if (bno > 999) { return "redirect:boardInfo?bno=" + bno; } else { return
+		 * "redirect:boardList"; }
+		 */
 	}
 	
 	// 수정 - 페이지	: URI - boardUpdate / PARAMETER - BoardVO / RETURN - board/boardUpdate
@@ -66,8 +69,8 @@ public class BoardController {
 	}
 	
 	// 수정 - 처리		: URI - boardUpdate / PARAMETER - BoardVO / RETURN - 수정결과 데이터(Map)
-	@PostMapping("boardUpdate")
-	@ResponseBody
+	@PostMapping("boardUpdate")		// 데이터 조작하기 때문에
+	@ResponseBody					// 리턴하는게 데이터
 	public Map<String, Object> updateBoardAjaxProcess(@RequestBody BoardVO boardVO) {
 		return boardService.updateBoard(boardVO);
 	}
