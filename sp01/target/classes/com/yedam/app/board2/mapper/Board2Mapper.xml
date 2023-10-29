@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.app.board2.mapper.Board2Mapper">
+	<!-- 전체조회 -->
+	<select id="selectBoardList" resultType="Board2VO">
+		SELECT 		*
+		FROM		board
+		ORDER BY 	bno
+	</select>
+	
+	<!-- 한건조회 -->
+	<select id="selectBoardInfo" resultType="Board2VO">
+		SELECT		*
+		FROM		board
+		WHERE		bno = #{bno}
+	</select>
+	
+	<!-- 등록 -->
+	<insert id="insertBoardInfo" parameterType="Board2VO">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(bno), 999) + 1
+			FROM board;
+		</selectKey>
+		INSERT INTO board(
+					bno
+					,title
+					,contents
+					,writer
+					,image
+					)
+			   VALUES(
+			   		#{bno}
+			   		,#{title}
+			   		,#{contents}
+			   		,#{writer}
+			   		,#{image}
+			   		)
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateBoardInfo" parameterType="Board2VO">
+		UPDATE board
+			SET
+				title = #{title},
+				contents = #{contents},
+				writer = #{writer},
+				updatedate = sysdate,
+				image = #{image},
+		WHERE bno = #{bno}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="deleteBoardInfo" parameterType="int">
+		DELETE FROM board
+		WHERE bno = #{bno}
+	</delete>
+	
+</mapper>

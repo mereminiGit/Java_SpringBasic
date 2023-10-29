@@ -41,9 +41,15 @@
 	
 	<!-- 도서대여현황 조회 -->
 	<select id="selectBookRentList" resultType="BookRentVO">
-		SELECT		*
-		FROM		rent_tbl_06
-		ORDER BY	rent_no
+		SELECT  Rent.book_no "book_no", Book.book_name "book_name", SUM(Rent.rent_price) "rent_total", COUNT(Rent.rent_date) "rent_count"
+		FROM rent_tbl_06 Rent, (Select A.book_no, A.book_name
+		                         from book_tbl_06 A, (SELECT book_no
+		                                             FROM rent_tbl_06
+		                                             GROUP BY book_no) B
+		                         where A.book_no = B.book_no) Book
+		WHERE Rent.book_no = Book.book_no
+		GROUP by Rent.book_no, Book.book_name
+		ORDER by rent.book_no
 	</select>
 	
 </mapper>
