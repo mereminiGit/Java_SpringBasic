@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +7,11 @@
 <title>도서등록</title>
 </head>
 <body>
-	<form action="bookInsert" method="post" name="insertForm"
-		accept-charset="utf-8">
-		<%-- 		<div>
-			<c:forEach items="">
-			
-			</c:forEach>
-		</div> --%>
+	<form action="bookInsert" method="post" name="bookInsertForm">
 		<table>
 			<tr>
 				<th>도서번호</th>
-				<td><input type="number" name="bookNo"></td>
+				<td><input type="number" name="bookNo" value="${no }" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<th>도서명</th>
@@ -30,7 +23,7 @@
 			</tr>
 			<tr>
 				<th>출판일자</th>
-				<td><input type="date" name="bookDate"></td>
+				<td><input type="date" name="bookDate" placeholder="yyyy/MM/dd"></td>
 			</tr>
 			<tr>
 				<th>금액</th>
@@ -48,22 +41,27 @@
 		<button type="submit">등록</button>
 		<button type="button" onclick="location.href='bookList'">조회</button>
 	</form>
-	
 	<script type="text/javascript">
-		document.querySelector('form').addEventListener('submit', function(e) {
+		document.querySelector('form[name=bookInsertForm]').addEventListener('submit', function(e) {
 			e.preventDefault();
-
-			console.log(document.querySelector('input[name=bookName]'));
+			console.log(e.target);
+			
+			let bookNo = document.querySelector('input[name=bookNo]');
 			let bookName = document.querySelector('input[name=bookName]');
 
+			if (bookNo.value == '') {
+				alert('도서코드가 입력되지 않았습니다.');
+				bookNo.focus();
+				return;
+			}
 			if (bookName.value == '') {
 				alert('도서명이 입력되지 않았습니다.');
 				bookName.focus();
 				return;
 			}
 
-			insertForm.submit();
-		});
+			bookInsertForm.submit();
+		})
 	</script>
 </body>
 </html>

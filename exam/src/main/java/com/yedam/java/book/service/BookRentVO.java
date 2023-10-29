@@ -8,10 +8,13 @@ import lombok.Data;
 
 @Data
 public class BookRentVO {
-	private int rentNo;
-	private int bookNo;
-	private int rentPrice;
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date rentDate;
-	private char rentStatus;
+	private Integer bookNo;
+	private String bookName;
+	private Integer rentTotal;
+	private Integer rentCount;
+//	private Integer bookNo;
+//	private Integer rentPrice;
+//	@DateTimeFormat(pattern = "yyyy/MM/dd")
+//	private Date rentDate;
+//	private char rentStatus;
 }
