@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.3.xsd">
+
+	<!-- 정적인 파일에 관련된 것들 시큐리티가 적용되지 않게 / pattern:경로에 관한것 -->
+	<security:http pattern="/css/**" security="none" />
+	
+	<!-- 시큐리티 동작을 위한 정의 -->
+	<security:http>
+		<!-- 시큐리티가 인증과 인과를 경로에 따라 하는것 / 순서는 위에서부터 아래서 작동한다. permitAll() : 누구나 -->
+		<security:intercept-url pattern="/top.jsp" access="permitAll()" />
+		<!-- 인증을 받았는데 admin 인과를 받은 사람 / hasAuthority : 특정한 권한을 가진 사람  -->
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" />
+		<!-- 나머지 기타에 대해서는 인증은 받아라 isAuthenticated() : 인증 받은 사람, 권한은 모르겠고 -->
+		<security:intercept-url pattern="/**" access="isAuthenticated()" />
+		
+		<!-- 폼 태그 기반 로그인 할 때 시큐리티가 자동으로 동작해서 로그인 처리 -->
+		<security:form-login default-target-url="/top.jsp" />
+		<!-- 가지고 있던 정보 세션을 깨는것 -->
+		<security:logout logout-url="/logout" logout-success-url="/top.jsp" />
+		<security:csrf disabled="false" />
+	</security:http>
+	
+	<!-- 인증, 인과에 대한 처리 -->
+	<security:authentication-manager>
+		<!-- <security:authentication-provider> -->
+		<security:authentication-provider user-service-ref="UserDetailsService">
+			<!-- <security:user-service>
+				{noop} 단순 테스트 할 때 비번 암호화 안 하는 것
+				<security:user name="user" password="{noop}1234" authorities="ROLE_USER" />
+				<security:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN" />
+			</security:user-service> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+</beans>

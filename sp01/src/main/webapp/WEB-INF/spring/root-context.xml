@@ -8,6 +8,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 일반 컴포넌트에서 처리하겠다. 웹 컴포넌트는 servlet-context에서 처리 org.springframework.stereotype.Controller controller 기준으로 제외 -->
+	<context:component-scan base-package="com.yedam.app">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 	<context:property-placeholder
 		location="classpath:config/*.properties" />
