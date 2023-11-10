@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="UTF-8">
+<title>Thymeleaf</title>
+</head>
+<body>
+	<div>
+		<table>
+			<tr>
+				<th>${...}</th>
+				<td th:text="${info}"></td>
+			</tr>
+			<tr>
+				<th>@{...}</th>
+				<td><a th:href="@{selectInfo}" th:text="|조회|"></a></td>
+			</tr>
+			
+			<!-- 반복문과 레이아웃 구분 / 주석할 때 타임리프 표현식 쓰면 오류 생김, 브라우저가 가지기 전에 해석되기 때문 -->
+			<th:block th:each="num : ${#numbers.sequence(1,5)}">
+				<tr>
+					<th th:if="${num != 3}">
+						[[ ${num} ]]
+					</th>
+				</tr>
+				<!-- <div th:text="${num}"></div> -->
+				<!--/*  */-->
+			</th:block>
+			
+			<!--/* 주석처리 */-->
+			<tr>
+				<th>표준 HTML 주석</th>
+				<!-- <td th:text="${info}"></td> -->
+			</tr>
+			<tr>
+				<th>타임리프 파서 주석</th>
+				<!--/* <td th:text="${info}"></td> */-->
+			</tr>
+			<tr>
+				<th>타임리프 프로토타입 주석</th>
+				<!--/*/ <td th:text="${info}"></td> /*/-->
+			</tr>
+		</table>
+	</div>
+	<div th:replace="~{footer :: footerFragment}"></div>
+</body>
+</html>
+
+
+
+
